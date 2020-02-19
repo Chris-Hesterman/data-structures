@@ -9,24 +9,23 @@ var Queue = function() {
   someInstance.enqueue = function(value) {
     back++;
     size++;
-    someInstance[back] = value;
+    storage[back] = value;
     if (size === 1) {
       front = back;
     }
   };
 
   someInstance.dequeue = function() {
-    let tempIndex = front;
+    let result;
 
     if (!size) {
       return null;
     }
-    storage[tempIndex] = someInstance[front];
-    delete someInstance[front];
+    result = storage[front];
+    delete storage[front];
     front++;
     size--;
-
-    return storage[tempIndex];
+    return result;
   };
 
   someInstance.size = function() {

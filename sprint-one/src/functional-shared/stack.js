@@ -2,6 +2,7 @@
 // but try not not reference your old code in writing the new style.
 var Stack = function() {
   let newInstance = {
+    storage: {},
     count: 0
   };
 
@@ -14,21 +15,21 @@ var Stack = function() {
 
 var stackMethods = {
   size: function() {
+    if (this.count < 0) {
+      this.count = 0;
+    }
     return this.count;
   },
   push: function(val) {
     this.count++;
-    this[this.count] = val;
+    this.storage[this.count] = val;
   },
   pop: function() {
-    let tempStorage = this[this.count];
+    let result = this.storage[this.count];
 
-    if (this.count <= 0) {
-      return null;
-    }
-    delete this[this.count];
+    delete this.storage[this.count];
     this.count--;
 
-    return tempStorage;
+    return result;
   }
 };

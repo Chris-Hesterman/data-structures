@@ -22,9 +22,8 @@ var queueMethods = {
     this.storage[this.back] = val;
   },
   dequeue: function() {
-    let result;
+    let result = this.storage[this.front];
 
-    result = this.storage[this.front];
     delete this.storage[this.front];
     this.front++;
     return result;

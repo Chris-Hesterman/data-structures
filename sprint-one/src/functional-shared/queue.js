@@ -2,7 +2,7 @@
 // but try not not reference your old code in writing the new style.
 var Queue = function() {
   let newInstance = {
-    size: 0,
+    storage: {},
     front: 0,
     back: 0
   };
@@ -14,7 +14,25 @@ var Queue = function() {
 };
 
 var queueMethods = {
-  enqueue: function(val) {},
-  dequeue: function() {},
-  size: function() {}
+  enqueue: function(val) {
+    if (!this.front) {
+      this.front++;
+    }
+    this.back++;
+    this.storage[this.back] = val;
+  },
+  dequeue: function() {
+    let result;
+
+    result = this.storage[this.front];
+    delete this.storage[this.front];
+    this.front++;
+    return result;
+  },
+  size: function() {
+    if (this.back + 1 - this.front <= 0 || this.back === 0) {
+      return 0;
+    }
+    return this.back + 1 - this.front;
+  }
 };

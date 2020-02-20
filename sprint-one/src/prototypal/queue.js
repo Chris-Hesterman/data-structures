@@ -5,13 +5,32 @@ var Queue = function() {
   newInstance.front = 0;
   newInstance.back = 0;
   newInstance.storage = {};
+
+  return newInstance;
 };
 
 var queueMethods = {
-  enqueue(value) {},
-  dequeue() {},
+  enqueue(value) {
+    if (!this.front) {
+      this.front++;
+    }
+    this.back++;
+    this.storage[this.back] = value;
+  },
+  dequeue() {
+    let result = this.storage[this.front];
+
+    delete this.storage[this.front];
+    if (this.back >= this.front) {
+      this.front++;
+    }
+    return result;
+  },
   size() {
-    return back + 1 - front;
+    if (this.front > this.back || !this.back) {
+      return 0;
+    }
+    return this.back + 1 - this.front;
   }
 };
 Queue.prototype.enqueue = queueMethods.enqueue;

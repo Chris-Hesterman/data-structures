@@ -29,7 +29,7 @@ var queueMethods = {
     return result;
   },
   size: function() {
-    if (this.back + 1 - this.front <= 0 || this.back === 0) {
+    if (this.back + 1 - this.front <= 0 || !this.back) {
       return 0;
     }
     return this.back + 1 - this.front;

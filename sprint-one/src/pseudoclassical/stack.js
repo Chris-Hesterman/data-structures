@@ -7,10 +7,19 @@ var Stack = function() {
 };
 
 let stackMethods = {
-  push: function(value) {},
-  pop: function() {},
+  push: function(value) {
+    this.top++;
+    this.storage[this.top] = value;
+  },
+  pop: function() {
+    result = this.storage[this.top];
+    if (this.top) {
+      this.top--;
+    }
+    return result;
+  },
   size: function() {
-    return top;
+    return this.top;
   }
 };
 

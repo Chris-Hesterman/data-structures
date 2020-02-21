@@ -7,9 +7,24 @@ var Queue = function() {
 };
 
 let queueMethods = {
-  enqueue: function(value) {},
-  dequeue: function() {},
+  enqueue: function(value) {
+    if (!this.front) {
+      this.front++;
+    }
+    this.back++;
+    this.storage[this.back] = value;
+  },
+  dequeue: function() {
+    let result = this.storage[this.front];
+
+    delete this.storage[this.front];
+    this.front++;
+    return result;
+  },
   size: function() {
+    if (this.front > this.back || !this.back) {
+      return 0;
+    }
     return this.back + 1 - this.front;
   }
 };

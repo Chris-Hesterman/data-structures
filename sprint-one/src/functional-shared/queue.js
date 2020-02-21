@@ -6,9 +6,8 @@ var Queue = function() {
     front: 0,
     back: 0
   };
-  newInstance.enqueue = queueMethods.enqueue;
-  newInstance.dequeue = queueMethods.dequeue;
-  newInstance.size = queueMethods.size;
+
+  _.extend(newInstance, queueMethods);
 
   return newInstance;
 };

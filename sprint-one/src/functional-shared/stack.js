@@ -6,9 +6,7 @@ var Stack = function() {
     count: 0
   };
 
-  newInstance.size = stackMethods.size;
-  newInstance.push = stackMethods.push;
-  newInstance.pop = stackMethods.pop;
+  _.extend(newInstance, stackMethods);
 
   return newInstance;
 };

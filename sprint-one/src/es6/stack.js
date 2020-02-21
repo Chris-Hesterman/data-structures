@@ -6,11 +6,26 @@ class Stack {
     this.top = 0;
   }
 
-  push(value) {}
+  push(value) {
+    if (!this.front) {
+      this.front++;
+    }
+    this.top++;
+    this.storage[this.top] = value;
+  }
 
-  pop() {}
+  pop() {
+    let result = this.storage[this.top];
+
+    delete this.storage[this.top];
+    top--;
+    return result;
+  }
 
   size() {
+    if (top < 0) {
+      return 0;
+    }
     return this.top;
   }
 }

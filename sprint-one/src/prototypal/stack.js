@@ -28,6 +28,3 @@ var stackMethods = {
     return this.top;
   }
 };
-// Stack.prototype.push = stackMethods.push;
-// Stack.prototype.pop = stackMethods.pop;
-// Stack.prototype.size = stackMethods.size;

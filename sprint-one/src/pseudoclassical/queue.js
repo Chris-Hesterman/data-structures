@@ -4,6 +4,7 @@ var Queue = function() {
   this.back = 0;
   this.front = 0;
   this.storage = {};
+  _.extend(Queue.prototype, queueMethods);
 };
 
 let queueMethods = {
@@ -28,7 +29,3 @@ let queueMethods = {
     return this.back + 1 - this.front;
   }
 };
-
-Queue.prototype.enqueue = queueMethods.enqueue;
-Queue.prototype.dequeue = queueMethods.dequeue;
-Queue.prototype.size = queueMethods.size;

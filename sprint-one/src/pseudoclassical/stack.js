@@ -4,6 +4,7 @@
 var Stack = function() {
   this.top = 0;
   this.storage = {};
+  _.extend(Stack.prototype, stackMethods);
 };
 
 let stackMethods = {
@@ -22,7 +23,3 @@ let stackMethods = {
     return this.top;
   }
 };
-
-Stack.prototype.push = stackMethods.push;
-Stack.prototype.pop = stackMethods.pop;
-Stack.prototype.size = stackMethods.size;

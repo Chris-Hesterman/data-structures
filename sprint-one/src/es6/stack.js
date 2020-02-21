@@ -18,12 +18,12 @@ class Stack {
     let result = this.storage[this.top];
 
     delete this.storage[this.top];
-    top--;
+    this.top--;
     return result;
   }
 
   size() {
-    if (top < 0) {
+    if (this.top < 0) {
       return 0;
     }
     return this.top;

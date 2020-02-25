@@ -23,7 +23,19 @@ var LinkedList = function() {
     return removedHead.value;
   };
 
-  list.contains = function(target) {};
+  list.contains = function(target) {
+    var currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.value === target) {
+        console.log(currentNode);
+        return true;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+    return false;
+  };
 
   return list;
 };
@@ -39,4 +51,9 @@ var Node = function(value) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * Linked list should be constant time O(1);
+ * addToTail should be constant time O(1);
+ * removeHead should be constant time O(1);
+ * contains should be linear time O(n);
+ * Node should be constant time O(1);
  */

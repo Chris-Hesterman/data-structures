@@ -20,6 +20,7 @@ var LinkedList = function() {
     var removedHead = this.head;
 
     this.head = this.head.next;
+
     return removedHead.value;
   };
 
@@ -34,6 +35,7 @@ var LinkedList = function() {
         currentNode = currentNode.next;
       }
     }
+
     return false;
   };
 

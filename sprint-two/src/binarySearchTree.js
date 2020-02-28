@@ -29,19 +29,23 @@ binTreeMethods.insert = function (value){
 }
 
 binTreeMethods.contains = function (value) {
-  let direction;
 
-  if (value > this.value) {
-    direction = 'right';
-  } else {
-    direction = 'left';
-  };
-  console.log(this.left);
-  if (this[direction] === value) {
+  if (value === this.value) {
     return true;
   }
-  if (this[direction] !== value || this[direction] !== undefined) {
-    this.contains.call(this[direction], value);
+  if (value > this.value) {
+    if (this.right) {
+      if (this.right.contains(value)) {
+        return true;
+      };
+    }
+  }
+  if (value < this.value) {
+    if (this.left) {
+      if(this.left.contains(value)) {
+        return true;
+      };
+    }
   }
   return false;
 }
@@ -59,4 +63,8 @@ binTreeMethods.depthFirstLog = function (callback){
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ .BinarySearchTree = O(1)
+ .insert = O(log n)
+ .contains = O(log n)
+ .depthFirstLog = O(n)
  */

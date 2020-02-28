@@ -18,6 +18,11 @@ describe('hashTable', function() {
     expect(hashTable.retrieve('Steven')).to.equal('Seagal');
   });
 
+  it('should retrieve correct value for provided key', function() {
+    hashTable.insert('Hack', 'Reactor');
+    expect(hashTable.retrieve('Hack')).to.equal('Reactor');
+  });
+
   it('should not contain values that were not inserted', function() {
     hashTable.insert('Steven', 'Spielberg');
     expect(hashTable.retrieve('Steven')).not.to.equal('Seagal');

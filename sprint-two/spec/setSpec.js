@@ -4,6 +4,9 @@ describe('set', function() {
   beforeEach(function() {
     set = Set();
   });
+  it('should use object for storage', function() {
+    expect(Array.isArray(set._storage)).to.equal(false);
+  });
 
   it('should have methods named "add", "contains", and "remove"', function() {
     expect(set.add).to.be.a('function');

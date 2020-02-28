@@ -47,10 +47,11 @@ HashTable.prototype.remove = function(key) {
   this._storage.set(index, bucket);
 };
 
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
+ * In the scope of the Hash Table, insert is O(1), but technically this method is O(n)
+ * Retrieve, same as insert, O(1) in scope of , technically O(n) on its own.
+ * Likewise for remove.
  */
 
 

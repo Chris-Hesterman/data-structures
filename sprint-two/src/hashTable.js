@@ -69,6 +69,19 @@ HashTable.prototype.tooSmall = function() {
   }
 };
 
+// loop through hashTable
+//  loop through buckets
+//    store tuples in a temp storage structure
+//      remove looped bucket
+
+// check input arg
+//  if 'increase'
+//    increase size of hashTable
+//  otherwise
+//    decrease size of hashTable
+
+// loop through temp storage structure
+//  re-populate hashTable
 /*
  * Complexity: What is the time complexity of the above functions?
  * In the scope of the Hash Table, insert is O(1), but technically this method is O(n)

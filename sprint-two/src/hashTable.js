@@ -1,7 +1,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
-  this._count = 0;
+  this._size = 0;
 };
 
 HashTable.prototype.insert = function(key, val) {
@@ -20,7 +20,7 @@ HashTable.prototype.insert = function(key, val) {
     bucket = [tuple];
   }
   this._storage.set(index, bucket);
-  this._count++;
+  this._size++;
   tooBig();
 };
 
@@ -46,27 +46,29 @@ HashTable.prototype.remove = function(key) {
     }
   }
   this._storage.set(index, bucket);
-  if (this._count > 0) {
-    this._count--;
+  if (this._size > 0) {
+    this._size--;
   }
   tooSmall();
 };
-// tooBig
-// i - number of entries
+
+// i - none
 // O - boolean, if table need resizing or not
 // C - O(1)
 // E - none
 
-// compare number of items with limit
+HashTable.prototype.tooBig = function() {
+  if (this._size / this._limit > 0.75) {
+    reHash('Increase');
+  }
+};
 
-// if number of items is too big (75% of limit)
-// rehash(inc);
-// Otherwise output false
+HashTable.prototype.tooSmall = function() {
+  if (this._size / this._limit < 0.25 && this._limit > 8) {
+    reHash('Decrease');
+  }
+};
 
-//tooSmall
-// if number of items too small and limit is larger than 8
-// rehash(dec)
-// Otherwise output false
 /*
  * Complexity: What is the time complexity of the above functions?
  * In the scope of the Hash Table, insert is O(1), but technically this method is O(n)

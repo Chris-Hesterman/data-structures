@@ -21,7 +21,7 @@ HashTable.prototype.insert = function(key, val) {
   }
   this._storage.set(index, bucket);
   this._size++;
-  tooBig();
+  this.tooBig();
 };
 
 HashTable.prototype.retrieve = function(key) {
@@ -49,7 +49,7 @@ HashTable.prototype.remove = function(key) {
   if (this._size > 0) {
     this._size--;
   }
-  tooSmall();
+  this.tooSmall();
 };
 
 // i - none
@@ -59,20 +59,43 @@ HashTable.prototype.remove = function(key) {
 
 HashTable.prototype.tooBig = function() {
   if (this._size / this._limit > 0.75) {
-    reHash('Increase');
+    this.reHash('Increase');
   }
 };
 
 HashTable.prototype.tooSmall = function() {
   if (this._size / this._limit < 0.25 && this._limit > 8) {
-    reHash('Decrease');
+    this.reHash('Decrease');
   }
 };
 
-// loop through hashTable
-//  loop through buckets
-//    store tuples in a temp storage structure
-//      remove looped bucket
+HashTable.prototype.reHash = function(flag) {
+  let tempStorageArr = [];
+
+  this._storage.each(function() {
+    let args = arguments;
+    console.log(args);
+    let bucket = args[0];
+    let index = args[1];
+    let storageArr = args[2];
+    if (bucket) {
+      for (let i = 0; i < bucket.length; i++) {
+        tempStorageArr.push(bucket[i]);
+      }
+    }
+    storageArr.splice(index, 1);
+  });
+
+  if (flag === 'Increase') {
+    this._limit *= 2;
+  } else {
+    this._limit /= 2;
+  }
+
+  for (var j = 0; j < tempStorageArr.length; j++) {
+    this.insert(tempStorageArr[j][0], tempStorageArr[j][1]);
+  }
+};
 
 // check input arg
 //  if 'increase'

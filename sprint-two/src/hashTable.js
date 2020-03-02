@@ -10,16 +10,17 @@ HashTable.prototype.insert = function(key, val) {
   var bucket = this._storage.get(index);
 
   if (bucket) {
-    for (var i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) {
-        bucket[i][1] = val;
+    for (let tuple of bucket) {
+      if (tuple[0] === key) {
+        tuple[1] = val;
+        this._size--;
       }
     }
     bucket.push(tuple);
   } else {
     bucket = [tuple];
   }
-  this._storage.set(index, bucket);
+  this._storage.set(index, bucket, this._limit);
   this._size++;
   this.tooBig();
 };
@@ -40,11 +41,16 @@ HashTable.prototype.retrieve = function(key) {
 HashTable.prototype.remove = function(key) {
   var index = getIndexBelowMaxForKey(key, this._limit);
   var bucket = this._storage.get(index);
-  for (var j = 0; j < bucket.length; j++) {
-    if (bucket[j][0] === key) {
-      bucket.splice(j, 1);
+
+  if (bucket) {
+    for (var j = 0; j < bucket.length; j++) {
+      if (bucket[j][0] === key) {
+        bucket.splice(j, 1);
+        console.log(bucket);
+      }
     }
   }
+
   this._storage.set(index, bucket);
   if (this._size > 0) {
     this._size--;
@@ -73,17 +79,13 @@ HashTable.prototype.reHash = function(flag) {
   let tempStorageArr = [];
 
   this._storage.each(function() {
-    let args = arguments;
-    console.log(args);
-    let bucket = args[0];
-    let index = args[1];
-    let storageArr = args[2];
+    let bucket = arguments[0];
+
     if (bucket) {
       for (let i = 0; i < bucket.length; i++) {
         tempStorageArr.push(bucket[i]);
       }
     }
-    storageArr.splice(index, 1);
   });
 
   if (flag === 'Increase') {
@@ -92,6 +94,7 @@ HashTable.prototype.reHash = function(flag) {
     this._limit /= 2;
   }
 
+  this._size = 0;
   for (var j = 0; j < tempStorageArr.length; j++) {
     this.insert(tempStorageArr[j][0], tempStorageArr[j][1]);
   }

@@ -3,7 +3,6 @@
  * Do not edit this code unless you see a bug!
  */
 
-
 // This class represents an array with limited functionality and a maximum size.
 // It will ensure that you don't accidentally try to use up too much space.
 //
@@ -19,7 +18,8 @@ var LimitedArray = function(limit) {
     checkLimit(index);
     return storage[index];
   };
-  limitedArray.set = function(index, value) {
+  limitedArray.set = function(index, value, max) {
+    limit = max;
     checkLimit(index);
     storage[index] = value;
   };

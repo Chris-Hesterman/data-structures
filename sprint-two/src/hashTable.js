@@ -57,11 +57,6 @@ HashTable.prototype.remove = function(key) {
   this.tooSmall();
 };
 
-// i - none
-// O - boolean, if table need resizing or not
-// C - O(1)
-// E - none
-
 HashTable.prototype.tooBig = function() {
   if (this._size / this._limit > 0.75) {
     this.reHash('Increase');
